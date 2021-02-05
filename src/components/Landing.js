@@ -6,7 +6,9 @@ class Landing extends React.Component {
     return (
       <div className="restaurant_select">
         <div className="restaurant_select_top">
-          <div className="restaurant_select_top-header">Выбери ресторан</div>
+          <div className="restaurant_select_top-header font-effect-outline">
+            Выбери ресторан
+          </div>
           <div className="arrow_picker">
             <div className="arrow_picker-up"></div>
             <div className="arrow_picker-down"></div>
