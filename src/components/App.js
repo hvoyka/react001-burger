@@ -4,6 +4,20 @@ import Order from "./Order";
 import MenuAdmin from "./MenuAdmin";
 
 class App extends React.Component {
+  state = {
+    burgers: {},
+    order: {},
+  };
+
+  addBurger = (burger) => {
+    //1. Делаем копию объекта state
+    const burgers = { ...this.state.burgers };
+    //2. Добавить новый бургер в объект burgers
+    burgers[`burger${Date.now()}`] = burger;
+    //3. Записать новый объект burgers в state
+    this.setState({ burgers });
+  };
+
   render() {
     return (
       <div className="burger-paradise">
@@ -12,7 +26,7 @@ class App extends React.Component {
           {/*  <Burger /> */}
         </div>
         <Order />
-        <MenuAdmin />
+        <MenuAdmin addBurger={this.addBurger} />
       </div>
     );
   }
