@@ -19,9 +19,16 @@ class App extends React.Component {
     //3. Записать новый объект burgers в state
     this.setState({ burgers });
   };
+
   loadSampleBurgers = () => {
     const burgers = { ...this.state.burgers, ...sampleBurgers };
     this.setState({ burgers });
+  };
+
+  addToOrder = (key) => {
+    const order = { ...this.state.order };
+    order[key] = (order[key] || 0) + 1;
+    this.setState({ order });
   };
 
   render() {
@@ -36,6 +43,7 @@ class App extends React.Component {
                   key={key}
                   index={key}
                   details={this.state.burgers[key]}
+                  addToOrder={this.addToOrder}
                 />
               );
             })}
