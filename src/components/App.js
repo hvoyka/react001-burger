@@ -26,20 +26,25 @@ class App extends React.Component {
       state: "burgers",
     });
   }
+
   componentDidUpdate() {
     const { params } = this.props.match;
     localStorage.setItem(params.restaurantId, JSON.stringify(this.state.order));
   }
+
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
 
   addBurger = (burger) => {
-    //1. Делаем копию объекта state
     const burgers = { ...this.state.burgers };
-    //2. Добавить новый бургер в объект burgers
     burgers[`burger${Date.now()}`] = burger;
-    //3. Записать новый объект burgers в state
+    this.setState({ burgers });
+  };
+
+  updateBurger = (key, updatedBurger) => {
+    const burgers = { ...this.state.burgers };
+    burgers[key] = updatedBurger;
     this.setState({ burgers });
   };
 
@@ -76,6 +81,8 @@ class App extends React.Component {
         <MenuAdmin
           addBurger={this.addBurger}
           loadSampleBurgers={this.loadSampleBurgers}
+          updateBurger={this.updateBurger}
+          burgers={this.state.burgers}
         />
       </div>
     );
