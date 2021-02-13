@@ -48,6 +48,13 @@ class App extends React.Component {
     this.setState({ burgers });
   };
 
+  deleteBurger = (key) => {
+    const burgers = { ...this.state.burgers };
+    //firebase
+    burgers[key] = null;
+    this.setState({ burgers });
+  };
+
   loadSampleBurgers = () => {
     const burgers = { ...this.state.burgers, ...sampleBurgers };
     this.setState({ burgers });
@@ -56,6 +63,12 @@ class App extends React.Component {
   addToOrder = (key) => {
     const order = { ...this.state.order };
     order[key] = (order[key] || 0) + 1;
+    this.setState({ order });
+  };
+
+  removeFromOrder = (key) => {
+    const order = { ...this.state.order };
+    delete order[key];
     this.setState({ order });
   };
 
@@ -77,11 +90,16 @@ class App extends React.Component {
             })}
           </ul>
         </div>
-        <Order burgers={this.state.burgers} order={this.state.order} />
+        <Order
+          burgers={this.state.burgers}
+          order={this.state.order}
+          removeFromOrder={this.removeFromOrder}
+        />
         <MenuAdmin
           addBurger={this.addBurger}
           loadSampleBurgers={this.loadSampleBurgers}
           updateBurger={this.updateBurger}
+          deleteBurger={this.deleteBurger}
           burgers={this.state.burgers}
         />
       </div>
