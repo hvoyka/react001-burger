@@ -1,8 +1,15 @@
 import React from "react";
 import Shipment from "./Shipment";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import PropTypes from "prop-types";
 
 class Order extends React.Component {
+  static propTypes = {
+    burgers: PropTypes.object,
+    order: PropTypes.object,
+    removeFromOrder: PropTypes.func,
+  };
+
   renderOrder = (key) => {
     const burger = this.props.burgers[key];
     const count = this.props.order[key];
